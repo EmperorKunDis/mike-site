@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="M.I.K.E. — Mindful Intelligent Knowledge Environment. Lokální český hlasový asistent pro Mac." />
+    <title>M.I.K.E. — Mindful Intelligent Knowledge Environment</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="nav shell">
+      <a class="brand" href="#top" aria-label="M.I.K.E. domů">M.I.K.E.<span>®</span></a>
+      <div class="local-pill"><i></i> 127.0.0.1 · LOKÁLNÍ</div>
+      <nav aria-label="Hlavní navigace">
+        <a href="#jak-funguje">Jak funguje</a>
+        <a href="#pameti">Paměť</a>
+        <a href="#soukromi">Soukromí</a>
+        <a href="#nastroje">Nástroje</a>
+      </nav>
+      <a class="button button-small" href="#pristup">Spustit <span>↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> LOKÁLNÍ SLUŽBA · ŽÁDNÝ CLOUD · ŽÁDNÁ TELEMETRIE</p>
+          <h1>M.I.K.E.</h1>
+          <h2>Konverzační prostředí.<br /><em>Ne jen chatbot.</em></h2>
+          <p class="lede">Naslouchá přes mikrofon, rozumí české řeči, drží kontext rozhovoru a odpovídá hlasem. Vše běží na vašem stroji.</p>
+          <div class="hero-actions">
+            <a class="button" href="#jak-funguje">Jak funguje <span>↓</span></a>
+            <code><b>$</b> mike start <span>--home ~/.mike</span></code>
+          </div>
+          <div class="live-card" aria-label="Ukázka živého stavu M.I.K.E.">
+            <div><span>ŽIVÝ STAV · SIMULACE</span><b>● MLČÍ</b></div>
+            <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p>Ví, kdy má mlčet. Čeká na oslovení.</p>
+          </div>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbital-ring ring-a"></div><div class="orbital-ring ring-b"></div>
+          <div class="core"><span>MIKE</span><i></i></div>
+          <div class="node node-stt">STT</div><div class="node node-llm">LLM</div><div class="node node-tts">TTS</div>
+          <p>VSTUP · MIKROFON <b>→</b> VÝSTUP · HLAS</p>
+        </div>
+      </section>
+
+      <div class="ticker" aria-label="Vlastnosti"><div>KLIDNÝ <b>✱</b> RYCHLÝ <b>✱</b> ČESKÝ <b>✱</b> LOKÁLNÍ <b>✱</b> KONTEXTOVÝ <b>✱</b> OPATRNÝ <b>✱</b> KLIDNÝ <b>✱</b> RYCHLÝ <b>✱</b> ČESKÝ <b>✱</b> LOKÁLNÍ <b>✱</b> KONTEXTOVÝ <b>✱</b> OPATRNÝ <b>✱</b></div></div>
+
+      <section class="flow-section shell" id="jak-funguje">
+        <canvas id="particle-flow" aria-hidden="true"></canvas>
+        <div class="section-intro">
+          <p class="eyebrow"><span></span> JAK FUNGUJE · 01—04</p>
+          <h2>Od dechu po odpověď.<br />Bez odchodu z vašeho Macu.</h2>
+          <p>Čtyři vrstvy propojené v jeden klidný, živý proud. M.I.K.E. zpracuje jen to, co skutečně potřebuje — a ví, kdy neodpovídat.</p>
+        </div>
+        <ol class="flow-steps">
+          <li><span class="step-number">01</span><div class="step-icon">◌</div><h3>Vstup</h3><p>Mikrofon zachytí řeč. Segmenter oddělí promluvu od ticha i vlastního přehrávání.</p><small>MIKROFON · LOKÁLNĚ</small></li>
+          <li><span class="step-number">02</span><div class="step-icon">⌁</div><h3>Zpracování</h3><p>Whisper převede českou řeč na text. Filtry vyřadí šum a neúplné segmenty.</p><small>STT · ČEŠTINA</small></li>
+          <li><span class="step-number">03</span><div class="step-icon">◇</div><h3>Kontext</h3><p>Lokální model pracuje s konverzací a jen s relevantní pamětí. Nic neposílá pryč.</p><small>LLM · PAMĚŤ</small></li>
+          <li><span class="step-number">04</span><div class="step-icon">◒</div><h3>Výstup</h3><p>Odpověď se zobrazí a zazní. Kdykoli ji můžete přerušit jediným slovem.</p><small>TTS · BARGE-IN</small></li>
+        </ol>
+      </section>
+
+      <section class="split shell" id="pameti">
+        <div><p class="eyebrow"><span></span> PAMĚŤ, KTEROU ŘÍDÍTE</p><h2>Vzpomene si.<br /><em>Jen když mu to řeknete.</em></h2><p>Explicitní paměť zůstává ve vaší lokální databázi. Jednou větou ji uložíte, jednou větou ji necháte zapomenout.</p><div class="command"><b>Vy</b><span>„Majku, pamatuj si, že pracuji nejlépe ráno.“</span></div><div class="command response"><b>M.I.K.E.</b><span>Zapamatováno. Kdykoli to můžeš změnit nebo smazat.</span></div></div>
+        <aside class="memory-card"><p>SQLITE · ENCRYPTION READY</p><div class="memory-line"><i></i><span>pracovní rytmus</span><b>explicitní</b></div><div class="memory-line"><i></i><span>preferovaný jazyk</span><b>explicitní</b></div><div class="memory-line dim"><i></i><span>žádná cloudová kopie</span><b>lokální</b></div><button type="button">Spravovat paměť <span>→</span></button></aside>
+      </section>
+
+      <section class="privacy" id="soukromi"><div class="shell privacy-grid"><p class="eyebrow"><span></span> SOUKROMÍ NENÍ NASTAVENÍ NAVÍC</p><h2>Vaše konverzace<br />nejsou produkt.</h2><div><p>Výchozí provoz je uzavřený uvnitř vašeho zařízení. Research, hlasový otisk i nástroje zapínáte vědomě — nikdy potichu.</p><a href="#pristup">Prozkoumat principy <span>↗</span></a></div><ul><li><b>01</b> Dashboard pouze na loopbacku</li><li><b>02</b> Telemetrie vypnutá</li><li><b>03</b> Surové audio se neukládá</li></ul></div></section>
+
+      <section class="tools shell" id="nastroje"><p class="eyebrow"><span></span> NÁSTROJE POD KONTROLOU</p><h2>Pomáhá. Nejedná za vašimi zády.</h2><div class="tool-grid"><article><span>↗</span><h3>Research</h3><p>Vyhledává veřejné informace až na váš explicitní pokyn.</p><small>OPT-IN</small></article><article><span>⌘</span><h3>Terminál</h3><p>Čte stav z povolených složek. Každá budoucí akce ukáže náhled.</p><small>READ-ONLY</small></article><article><span>◈</span><h3>Autonomie</h3><p>Budoucí workflow budou mít rozsah oprávnění, audit a okamžitý kill switch.</p><small>VE VÝVOJI</small></article></div></section>
+
+      <section class="cta shell" id="pristup"><p class="eyebrow"><span></span> M.I.K.E. PRO MACOS · APPLE SILICON</p><h2>Méně rozhraní.<br />Více porozumění.</h2><form class="waitlist" id="waitlist-form" data-api="https://api.m.i.k.e.praut.cz/v1/waitlist" data-turnstile-sitekey="" novalidate><label for="email">E-mail pro early access</label><div class="waitlist-row"><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="vy@firma.cz" required /><button class="button" type="submit">Chci být u toho <span>↗</span></button></div><label class="consent"><input name="consent" type="checkbox" required /> <span>Souhlasím se zpracováním e-mailu pro čekací listinu po dobu 24 měsíců podle <a href="privacy.html">zásad soukromí</a>.</span></label><div class="turnstile-slot" id="turnstile-slot"></div><p class="form-status" id="waitlist-status" role="status" aria-live="polite"></p></form></section>
+    </main>
+    <footer class="shell"><a class="brand" href="#top">M.I.K.E.<span>®</span></a><p>Mindful Intelligent Knowledge Environment</p><a href="privacy.html">Soukromí</a><span>© 2026</span></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
