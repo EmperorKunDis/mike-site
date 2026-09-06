@@ -1,0 +1,46 @@
+{
+  "slug": "mike",
+  "text": {
+    "lang": "cs",
+    "version": "1.0",
+    "brand_name": "M.I.K.E.",
+    "brand_domain": "m.i.k.e.praut.cz",
+    "tagline": "Mindful Intelligent Knowledge Environment. Lokální konverzační prostředí pro Mac, které naslouchá, rozumí a jedná jen pod kontrolou člověka.",
+    "fonts_url": "",
+    "logo_desc": "Primární značka je přesná textová forma M.I.K.E. se čtyřmi tečkami. Bez ilustrativní ikony a bez napodobování produktů Apple.",
+    "color_desc": "Tmavý graphite základ dovoluje vyniknout jedinému teplému signálu: přechodu od broskvové k lososové. Tyrkysová zůstává výhradně datovým tokem a aktivním lokálním stavem.",
+    "mode_title": "Práce s dark mode",
+    "mode_desc": "M.I.K.E. je dark-first. Hloubku nesou neutrální plochy; teplý akcent je rezervován pro záměr uživatele a jasně označené akce."
+  },
+  "sections": ["foundations", "patterns", "handoff"],
+  "tokens": {
+    "bg": "#0D0E10", "surface-1": "#15171A", "surface-2": "#1D2024", "surface-3": "rgba(255,157,119,.10)", "surface-border": "rgba(245,239,232,.12)",
+    "text": "#F5EFE8", "text-muted": "#B4AEA8", "text-subtle": "#787A7D",
+    "accent": "#FF9D77", "accent-2": "#F27A61", "on-accent": "#16110F",
+    "gradient-brand": "linear-gradient(135deg,#FFB08B 0%,#FF9D77 50%,#F27A61 100%)", "gradient-surface": "linear-gradient(145deg,#1D2024 0%,#111315 100%)",
+    "success": "#66D6AC", "success-bg": "rgba(102,214,172,.12)", "warning": "#FFC96B", "warning-bg": "rgba(255,201,107,.12)", "error": "#FF8C82", "error-bg": "rgba(255,140,130,.12)", "info": "#67D8D1", "info-bg": "rgba(103,216,209,.12)",
+    "font-head": "'Avenir Next', 'Helvetica Neue', Arial, sans-serif", "font-body": "'Avenir Next', 'Helvetica Neue', Arial, sans-serif", "font-mono": "'SF Mono', 'IBM Plex Mono', monospace",
+    "space-1": "4px", "space-2": "8px", "space-3": "12px", "space-4": "16px", "space-5": "20px", "space-6": "24px", "space-8": "32px", "space-10": "40px", "space-12": "48px", "space-16": "64px", "space-20": "80px", "space-24": "96px",
+    "radius-sm": "6px", "radius-md": "12px", "radius-lg": "18px", "radius-xl": "26px", "radius-2xl": "34px", "radius-full": "9999px",
+    "shadow-sm": "0 1px 3px rgba(0,0,0,.25)", "shadow-md": "0 12px 32px rgba(0,0,0,.22)", "shadow-lg": "0 24px 64px rgba(0,0,0,.30)", "shadow-xl": "0 36px 96px rgba(0,0,0,.38)", "shadow-glow": "0 0 36px rgba(255,157,119,.25)",
+    "sidebar-w": "230px", "section-space": "88px"
+  },
+  "colors": {
+    "palette_strip": ["#0D0E10", "#1D2024", "#F5EFE8", "#FF9D77", "#F27A61", "#67D8D1"],
+    "base": [
+      {"name":"Graphite","hex":"#0D0E10","note":"výchozí pozadí"},
+      {"name":"Porcelain","hex":"#F5EFE8","note":"primární text"},
+      {"name":"Peach Signal","hex":"#FF9D77","note":"CTA, focus, lidský záměr"},
+      {"name":"Salmon Response","hex":"#F27A61","note":"druhý konec brand gradientu"},
+      {"name":"Cyan Flow","hex":"#67D8D1","note":"pouze stav a datový tok"}
+    ],
+    "scales": [
+      {"name":"Peach signal","base":"#FF9D77","desc":"Jediný teplý interakční akcent."},
+      {"name":"Graphite depth","base":"#1D2024","desc":"Neutrální plochy pro dark-first rozhraní."}
+    ],
+    "gradients": [
+      {"name":"gradient-brand","value":"linear-gradient(135deg,#FFB08B 0%,#FF9D77 50%,#F27A61 100%)"},
+      {"name":"gradient-surface","value":"linear-gradient(145deg,#1D2024 0%,#111315 100%)"}
+    ]
+  }
+}

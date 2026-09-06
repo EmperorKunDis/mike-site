@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+  PRAUT VISUAL BOOK — MASTER TEMPLATE v2.0
+  Sjednocená šablona odvozená z 10 existujících Visual Booků.
+
+  JAK POUŽÍT
+  1) Vyplň brand.json a spusť:  python3 build_visualbook.py brand.json
+     NEBO
+  2) Ručně: najdi a nahraď všechny dvojité složené závorky a vyplň bloky
+     označené /* ⟦NÁZEV⟧ */ ... /* ⟦/NÁZEV⟧ */
+
+  PLACEHOLDERY
+  cs M.I.K.E. m.i.k.e.praut.cz 1.0 Mindful Intelligent Knowledge Environment. Lokální konverzační prostředí pro Mac, které naslouchá, rozumí a jedná jen pod kontrolou člověka.
+   Primární značka je přesná textová forma M.I.K.E. se čtyřmi tečkami. Bez ilustrativní ikony a bez napodobování produktů Apple. Práce s dark mode M.I.K.E. je dark-first. Hloubku nesou neutrální plochy; teplý akcent je rezervován pro záměr uživatele a jasně označené akce. Tmavý graphite základ dovoluje vyniknout jedinému teplému signálu: přechodu od broskvové k lososové. Tyrkysová zůstává výhradně datovým tokem a aktivním lokálním stavem.
+
+  SEKCE — povinné jádro 00–09, volitelné moduly 10–13.
+  Volitelné moduly jsou zabalené v <!-- OPTIONAL: ... --> — smaž, co nepotřebuješ.
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="M.I.K.E. — Visual Book & Design System v1.0">
+<title>M.I.K.E. – Visual Book &amp; Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   M.I.K.E. DESIGN SYSTEM v1.0
+   Zdroj: m.i.k.e.praut.cz
+═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────
+   TOKENY — jediné místo, kde se mění identita.
+   Žádná komponenta níže nesmí obsahovat hardcodovaný hex.
+   ───────────────────────────────────────────────────────── */
+/* ⟦TOKENS⟧ */
+:root {
+  --bg: #0D0E10;
+  --surface-1: #15171A;
+  --surface-2: #1D2024;
+  --surface-3: rgba(255,157,119,.10);
+  --surface-border: rgba(245,239,232,.12);
+  --text: #F5EFE8;
+  --text-muted: #B4AEA8;
+  --text-subtle: #787A7D;
+  --accent: #FF9D77;
+  --accent-2: #F27A61;
+  --on-accent: #16110F;
+  --gradient-brand: linear-gradient(135deg,#FFB08B 0%,#FF9D77 50%,#F27A61 100%);
+  --gradient-surface: linear-gradient(145deg,#1D2024 0%,#111315 100%);
+  --success: #66D6AC;
+  --success-bg: rgba(102,214,172,.12);
+  --warning: #FFC96B;
+  --warning-bg: rgba(255,201,107,.12);
+  --error: #FF8C82;
+  --error-bg: rgba(255,140,130,.12);
+  --info: #67D8D1;
+  --info-bg: rgba(103,216,209,.12);
+  --font-head: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'IBM Plex Mono', monospace;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-2xl: 34px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.25);
+  --shadow-md: 0 12px 32px rgba(0,0,0,.22);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,.30);
+  --shadow-xl: 0 36px 96px rgba(0,0,0,.38);
+  --shadow-glow: 0 0 36px rgba(255,157,119,.25);
+  --sidebar-w: 230px;
+  --section-space: 88px;
+}
+/* ⟦/TOKENS⟧ */
+
+/* ─── RESET & ZÁKLAD ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);padding:2px 6px;border-radius:var(--radius-sm)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* Skip link — přístupnost, nesmazat */
+.skip-link{position:fixed;top:8px;left:8px;z-index:100;transform:translateY(-200%);
+  background:var(--text);color:var(--bg);padding:10px 16px;border-radius:var(--radius-md);
+  text-decoration:none;font-weight:600}
+.skip-link:focus{transform:none}
+
+/* ─── LAYOUT ─── */
+.layout{display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:var(--surface-1);
+  border-right:1px solid var(--surface-border);padding:28px 0;overflow-y:auto;z-index:10}
+.sidebar-brand{padding:0 24px 22px;font-family:var(--font-head);font-weight:800;font-size:19px;
+  border-bottom:1px solid var(--surface-border);margin-bottom:14px}
+.sidebar-brand .grad{background:var(--gradient-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sidebar-brand small{display:block;margin-top:4px;font-size:11px;font-weight:500;color:var(--text-muted);font-family:var(--font-mono)}
+.sidebar a{display:block;padding:9px 24px;color:var(--text-muted);text-decoration:none;font-size:14px;
+  border-left:3px solid transparent;transition:.15s}
+.sidebar a:hover,.sidebar a.active{color:var(--text);border-left-color:var(--accent);background:var(--surface-2)}
+main{margin-left:var(--sidebar-w);flex:1;padding:0 min(6vw,72px) 120px;max-width:1200px;position:relative;z-index:1}
+section{padding-top:var(--section-space)}
+
+/* ─── HLAVIČKA SEKCE ─── */
+.section-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.section-title{font-family:var(--font-head);font-size:34px;font-weight:800;margin:6px 0 10px;line-height:1.15}
+.section-desc{color:var(--text-muted);max-width:640px;margin-bottom:34px}
+.subsection-title{font-family:var(--font-head);font-size:20px;font-weight:700;margin:38px 0 14px}
+
+/* ─── COVER ─── */
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding-top:40px}
+.cover h1{font-family:var(--font-head);font-size:clamp(42px,6vw,72px);font-weight:800;line-height:1.08;margin:14px 0}
+.cover h1 .grad{background:var(--gradient-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover p{font-size:19px;color:var(--text-muted);max-width:560px}
+.palette-strip{display:flex;height:14px;border-radius:var(--radius-full);overflow:hidden;margin-top:44px;max-width:560px;box-shadow:var(--shadow-md)}
+.palette-strip span{flex:1}
+
+/* ─── GRID & KARTY ─── */
+.components-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:var(--space-5)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+.component-card{background:var(--surface-1);border:1px solid var(--surface-border);
+  border-radius:var(--radius-xl);padding:26px;box-shadow:var(--shadow-md)}
+.component-card-full{grid-column:1/-1}
+.component-title{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:16px}
+.component-demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.text-sm{font-size:13px;color:var(--text-muted)}
+
+/* ─── BARVY ─── */
+.color-group{margin-bottom:38px}
+.color-group-title{font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:4px}
+.color-group-desc{color:var(--text-muted);font-size:14px;margin-bottom:14px}
+.shade-row{display:flex;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)}
+.shade{flex:1;min-width:0;padding:26px 6px 8px;display:flex;flex-direction:column;gap:2px;
+  font-family:var(--font-mono);font-size:10.5px;text-align:center;cursor:copy}
+.shade-name{font-weight:700}
+.color-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-4)}
+.color-swatch{background:var(--surface-1);border:1px solid var(--surface-border);border-radius:var(--radius-lg);overflow:hidden}
+.swatch-fill{height:84px;cursor:copy}
+.color-swatch .info{padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.color-swatch .name{font-weight:700;font-size:14px}
+.color-swatch .hex,.gradient-card .hex{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);word-break:break-all}
+.color-swatch .note{font-size:12px;color:var(--text-muted)}
+.gradient-card{background:var(--surface-1);border:1px solid var(--surface-border);
+  border-radius:var(--radius-lg);overflow:hidden;margin-bottom:var(--space-4)}
+.gradient-fill{height:72px}
+.gradient-card .info{padding:12px 14px}
+.gradient-card .name{font-weight:700;font-size:14px;display:block}
+.rule-bars{display:flex;height:52px;border-radius:var(--radius-lg);overflow:hidden;
+  font-family:var(--font-mono);font-size:12px;font-weight:700}
+.rule-bars div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 4px}
+
+/* ─── LOGO ─── */
+.logo-stage{background:var(--surface-2);border:1px solid var(--surface-border);border-radius:var(--radius-xl);
+  padding:56px;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.logo-display{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-bottom:22px}
+.logo-card{min-height:220px;padding:32px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:20px;border:1px solid var(--surface-border);border-radius:var(--radius-xl)}
+.logo-card.dark{background:#0b0e14}
+.logo-card.light{background:#f4f5fb;color:#12131a}
+.logo-card .label{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted)}
+.logo-card.light .label{color:#5b6070}
+.logo-variations{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-4)}
+.logo-variation{background:var(--surface-2);border:1px solid var(--surface-border);border-radius:var(--radius-lg);
+  padding:28px 16px;text-align:center}
+.logo-variation .name{display:block;margin-top:12px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+.logo-text-display{font-family:var(--font-head);font-size:38px;font-weight:800;letter-spacing:-.02em}
+.logo-text-display.gradient{background:var(--gradient-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.clear-space-demo{background:var(--surface-2);border:1px dashed var(--accent);border-radius:var(--radius-lg);
+  padding:64px;display:flex;align-items:center;justify-content:center;position:relative}
+ul.assets{margin:14px 0 0 20px;color:var(--text-muted);font-size:14.5px}
+ul.assets li{margin-bottom:6px}
+
+/* ─── TYPOGRAFIE ─── */
+.type-scale-item{padding:16px 0;border-bottom:1px solid var(--surface-border)}
+.type-scale-label{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted)}
+.type-scale-sample{line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.type-alphabet{font-size:15px;color:var(--text-muted);word-break:break-all;margin-bottom:8px}
+.type-weights{display:flex;flex-wrap:wrap;gap:var(--space-4);margin-top:12px}
+.type-weight{text-align:center}
+.type-weight span{display:block;font-family:var(--font-mono);font-size:10.5px;color:var(--text-muted);margin-top:4px}
+
+/* ─── TLAČÍTKA & BADGE ─── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;
+  font-family:var(--font-head);font-weight:700;font-size:14.5px;border:none;border-radius:var(--radius-md);
+  padding:12px 24px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--gradient-brand);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-secondary{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.btn-secondary:hover{background:var(--surface-3)}
+.btn-ghost{background:transparent;color:var(--text-muted)}
+.btn-ghost:hover{color:var(--text);background:var(--surface-2)}
+.btn-danger{background:var(--error);color:var(--on-accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn-sm{min-height:36px;padding:8px 16px;font-size:13px}
+.btn-lg{min-height:52px;padding:15px 32px;font-size:16px}
+.badge{display:inline-block;font-family:var(--font-mono);font-size:11.5px;font-weight:600;
+  border-radius:var(--radius-full);padding:4px 12px}
+.badge-brand{background:var(--surface-3);color:var(--accent)}
+.badge-success{background:var(--success-bg);color:var(--success)}
+.badge-warning{background:var(--warning-bg);color:var(--warning)}
+.badge-error{background:var(--error-bg);color:var(--error)}
+.badge-info{background:var(--info-bg);color:var(--info)}
+
+/* ─── DALŠÍ KOMPONENTY ─── */
+.toggle{position:relative;width:46px;height:26px;border-radius:var(--radius-full);
+  background:var(--surface-2);border:1px solid var(--surface-border);cursor:pointer;transition:.2s}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;
+  border-radius:50%;background:var(--text-muted);transition:.2s}
+.toggle.on{background:var(--gradient-brand);border-color:transparent}
+.toggle.on::after{left:23px;background:var(--on-accent)}
+.progress-track{height:8px;border-radius:var(--radius-full);background:var(--surface-2);overflow:hidden}
+.progress-fill{height:100%;background:var(--gradient-brand);border-radius:var(--radius-full)}
+.alert{display:flex;gap:12px;padding:14px 16px;border-radius:var(--radius-md);font-size:14px;margin-bottom:10px}
+.alert-icon{flex-shrink:0;font-weight:700}
+.alert-success{background:var(--success-bg);border:1px solid var(--success);color:var(--success)}
+.alert-warning{background:var(--warning-bg);border:1px solid var(--warning);color:var(--warning)}
+.alert-error{background:var(--error-bg);border:1px solid var(--error);color:var(--error)}
+.alert-info{background:var(--info-bg);border:1px solid var(--info);color:var(--info)}
+.tooltip-box{display:inline-block;background:var(--surface-2);border:1px solid var(--surface-border);
+  border-radius:var(--radius-md);padding:7px 12px;font-size:13px;box-shadow:var(--shadow-md)}
+.dropdown-menu{background:var(--surface-2);border:1px solid var(--surface-border);
+  border-radius:var(--radius-md);padding:6px;min-width:180px;box-shadow:var(--shadow-lg)}
+.dropdown-item{padding:8px 12px;border-radius:var(--radius-sm);font-size:14px;color:var(--text-muted);cursor:pointer}
+.dropdown-item:hover{background:var(--surface-3);color:var(--text)}
+.table-wrapper{overflow-x:auto;border:1px solid var(--surface-border);border-radius:var(--radius-lg)}
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th,.table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--surface-border)}
+.table th{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.table tr:last-child td{border-bottom:0}
+.modal-demo{background:var(--surface-2);border:1px solid var(--surface-border);
+  border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);max-width:420px}
+.modal-header{padding:20px 24px;border-bottom:1px solid var(--surface-border);
+  display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.modal-close{background:none;border:none;color:var(--text-muted);font-size:20px;line-height:1}
+.modal-body{padding:20px 24px;color:var(--text-muted);font-size:14px}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--surface-border);display:flex;gap:10px;justify-content:flex-end}
+
+/* ─── FORMULÁŘE ─── */
+.input,select.input,textarea.input{width:100%;background:var(--surface-2);border:1.5px solid var(--surface-border);
+  border-radius:var(--radius-md);color:var(--text);font-family:var(--font-body);font-size:14.5px;
+  padding:11px 14px;outline:none;transition:.15s}
+.input::placeholder{color:var(--text-subtle)}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--surface-3)}
+.input.is-error{border-color:var(--error)}
+.input:disabled{opacity:.45;cursor:not-allowed}
+label.field{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.field-help{font-size:12px;color:var(--text-muted);margin-top:5px}
+.field-error{font-size:12px;color:var(--error);margin-top:5px}
+.checkbox-row{display:flex;align-items:center;gap:9px;font-size:14.5px;margin:7px 0}
+.checkbox-row input{accent-color:var(--accent);width:17px;height:17px}
+
+/* ─── NAVIGACE ─── */
+.nav-demo{background:var(--surface-1);border:1px solid var(--surface-border);border-radius:var(--radius-lg);
+  padding:14px 22px;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.nav-demo .logo{font-family:var(--font-head);font-weight:800}
+.nav-demo a{color:var(--text-muted);text-decoration:none;font-size:14px}
+.nav-demo a.active{color:var(--accent);font-weight:600}
+.sidebar-demo{background:var(--surface-1);border:1px solid var(--surface-border);
+  border-radius:var(--radius-lg);padding:10px;max-width:240px}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-md);
+  color:var(--text-muted);font-size:14px;cursor:pointer}
+.sidebar-item:hover{background:var(--surface-2);color:var(--text)}
+.sidebar-item.active{background:var(--surface-3);color:var(--accent);font-weight:600}
+.tabs{display:flex;gap:4px;border-bottom:1.5px solid var(--surface-border);margin-top:22px;flex-wrap:wrap}
+.tab{padding:10px 18px;font-size:14px;color:var(--text-muted);border-bottom:2.5px solid transparent;cursor:pointer}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.breadcrumbs{font-size:14px;color:var(--text-muted);margin-top:22px}
+.breadcrumbs .sep{color:var(--accent);margin:0 6px}
+.breadcrumbs .current{color:var(--text)}
+.pagination{display:flex;gap:6px;margin-top:22px}
+.page-btn{min-width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--radius-md);border:1px solid var(--surface-border);background:var(--surface-1);
+  color:var(--text-muted);font-size:14px;cursor:pointer}
+.page-btn.active{background:var(--gradient-brand);color:var(--on-accent);border-color:transparent}
+
+/* ─── SPACING ─── */
+.spacing-item,.radius-item{display:flex;align-items:center;gap:var(--space-4);margin-bottom:10px}
+.spacing-box{height:22px;background:var(--gradient-brand);border-radius:var(--radius-sm)}
+.radius-box{width:52px;height:52px;background:var(--surface-2);border:2px solid var(--accent);flex-shrink:0}
+.spacing-label{font-family:var(--font-mono);font-size:12.5px;width:88px}
+.spacing-value{font-family:var(--font-mono);font-size:12.5px;color:var(--text-muted)}
+.shadow-demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-5)}
+.shadow-demo div{background:var(--surface-1);border-radius:var(--radius-lg);padding:26px 10px;
+  text-align:center;font-family:var(--font-mono);font-size:12px}
+
+/* ─── REŽIM / HLOUBKA ─── */
+.depth-demo{padding:16px;background:var(--bg);border-radius:var(--radius-md);
+  border:1px solid var(--surface-border);font-size:13px;font-family:var(--font-mono);color:var(--text-muted)}
+.depth-demo > div{padding:14px;background:var(--surface-1);border-radius:var(--radius-md);margin-top:10px;border:1px solid var(--surface-border)}
+.depth-demo > div > div{padding:12px;background:var(--surface-2);border-radius:var(--radius-md);margin-top:10px}
+.surface-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.surface-chip{width:40px;height:40px;border-radius:var(--radius-md);border:1px solid var(--surface-border);flex-shrink:0}
+
+/* ─── GUIDELINES ─── */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+.do-item,.dont-item{padding:13px 16px;border-radius:var(--radius-md);font-size:14.5px;margin-bottom:10px}
+.do-item{background:var(--success-bg);border:1px solid var(--success)}
+.dont-item{background:var(--error-bg);border:1px solid var(--error)}
+
+/* ─── OPTIONAL: FOUNDATIONS / RULES ─── */
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-4)}
+.rule-card{padding:20px;border-radius:var(--radius-lg);border:1px solid var(--surface-border);background:var(--surface-1)}
+.rule-card h4{font-family:var(--font-head);font-size:13px;font-family:var(--font-mono);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.rule-card.keep h4{color:var(--success)}
+.rule-card.adapt h4{color:var(--warning)}
+.rule-card.never h4{color:var(--error)}
+.rule-card ul{margin-left:18px;font-size:14px;color:var(--text-muted)}
+.rule-card li{margin-bottom:6px}
+
+/* ─── OPTIONAL: IKONY ─── */
+.icon-spec{display:flex;align-items:center;gap:16px;padding:16px;border:1px solid var(--surface-border);
+  border-radius:var(--radius-md);background:var(--surface-1)}
+.icon-spec .glyph{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-md);
+  background:var(--surface-3);color:var(--accent);font-size:24px;flex-shrink:0}
+.icon-spec strong{display:block;font-family:var(--font-mono);font-size:13px}
+
+/* ─── PRINT ─── */
+@media print{
+  .sidebar,.skip-link{display:none}
+  main{margin:0;max-width:none;padding:0}
+  section{padding-top:32px;break-inside:avoid}
+  body{background:#fff;color:#000}
+  .component-card{box-shadow:none;border:1px solid #ccc}
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:860px){
+  .sidebar{position:static;width:100%;height:auto;padding:14px 0;border-right:0;
+    border-bottom:1px solid var(--surface-border)}
+  .sidebar a{display:inline-block;border-left:0;border-bottom:2px solid transparent;padding:8px 14px}
+  .layout{display:block}
+  main{margin-left:0;padding:0 20px 80px}
+  .dodont,.logo-display,.grid-2,.grid-3{grid-template-columns:1fr}
+  :root{--section-space:64px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#cover">Přeskočit na obsah</a>
+<div class="layout">
+
+<nav class="sidebar" aria-label="Obsah design systému">
+  <div class="sidebar-brand">
+    <span class="grad">M.I.K.E.</span>
+    <small>Visual Book · v1.0</small>
+  </div>
+  <a href="#cover">Úvod</a>
+  <a href="#logo">Značka</a>
+  <a href="#colors">Barevný systém</a>
+  <a href="#typography">Písma a texty</a>
+  <a href="#components">UI prvky</a>
+  <a href="#forms">Formuláře</a>
+  <a href="#navigation">Navigace</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#mode">Režim a hloubka</a>
+  <a href="#guidelines">Použití značky</a>
+  <!-- OPTIONAL moduly -->
+  <a href="#foundations">Foundations</a>
+  <a href="#patterns">Produktové vzory</a>
+  <a href="#handoff">Handoff</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════ 00 · COVER ═══════════════════════════════ -->
+<section class="cover" id="cover">
+  <span class="section-label">Design System · v1.0 · m.i.k.e.praut.cz</span>
+  <h1><span class="grad">M.I.K.E.</span><br>Visual Book</h1>
+  <p>Mindful Intelligent Knowledge Environment. Lokální konverzační prostředí pro Mac, které naslouchá, rozumí a jedná jen pod kontrolou člověka.</p>
+  <!-- ⟦PALETTE_STRIP⟧ 4–6 klíčových barev značky, v pořadí akcent → pozadí -->
+  <div class="palette-strip"><span style="background:#0D0E10"></span><span style="background:#1D2024"></span><span style="background:#F5EFE8"></span><span style="background:#FF9D77"></span><span style="background:#F27A61"></span><span style="background:#67D8D1"></span></div>
+<!-- ⟦/PALETTE_STRIP⟧ -->
+</section>
+
+<!-- ═══════════════════════════════ 01 · ZNAČKA ══════════════════════════════ -->
+<section id="logo">
+  <span class="section-label">01 · Značka</span>
+  <h2 class="section-title">Značka M.I.K.E.</h2>
+  <p class="section-desc">Primární značka je přesná textová forma M.I.K.E. se čtyřmi tečkami. Bez ilustrativní ikony a bez napodobování produktů Apple.</p>
+
+  <!-- VARIANTA A — jedno logo na neutrálním pozadí -->
+  <div class="logo-stage">
+    <img src="logo-main.svg" alt="M.I.K.E. logo" style="max-width:320px;max-height:140px">
+  </div>
+
+  <!-- VARIANTA B — dvojice tmavá/světlá. Použij, pokud logo běží na obou pozadích.
+  <div class="logo-display">
+    <div class="logo-card dark">
+      <img src="logo-light.svg" alt="M.I.K.E. logo na tmavém" style="max-width:100%">
+      <span class="label">Na tmavém pozadí (primární)</span>
+    </div>
+    <div class="logo-card light">
+      <img src="logo-dark.svg" alt="M.I.K.E. logo na světlém" style="max-width:100%">
+      <span class="label">Na světlém pozadí</span>
+    </div>
+  </div>
+  -->
+
+  <h3 class="subsection-title">Textová varianta</h3>
+  <div class="logo-variations">
+    <div class="logo-variation">
+      <span class="logo-text-display gradient">M.I.K.E.</span>
+      <span class="name">Gradient</span>
+    </div>
+    <div class="logo-variation">
+      <span class="logo-text-display" style="color:var(--text)">M.I.K.E.</span>
+      <span class="name">Plná / bílá</span>
+    </div>
+    <div class="logo-variation" style="background:#f0f0f5">
+      <span class="logo-text-display" style="color:#12131a">M.I.K.E.</span>
+      <span class="name" style="color:#5b6070">Na světlém</span>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Ochranná zóna</h3>
+  <p class="text-sm" style="margin-bottom:14px">Kolem loga vždy zachovej volný prostor minimálně o výšce prvního
+    písmene značky. Do této zóny nesmí zasahovat text ani jiné grafické prvky.</p>
+  <div class="clear-space-demo">
+    <span class="logo-text-display gradient">M.I.K.E.</span>
+  </div>
+
+  <div class="components-grid" style="margin-top:22px">
+    <div class="component-card">
+      <h3 class="component-title">Minimální velikost</h3>
+      <p class="text-sm">Digitál: min. 24 px výšky. Tisk: min. 8 mm. Pod touto hranicí použij pouze symbol / favicon.</p>
+    </div>
+    <div class="component-card">
+      <h3 class="component-title">Zakázané úpravy</h3>
+      <p class="text-sm">Neměň poměr symbolu a textu, nerotuj, nepřebarvuj mimo schválené varianty, nepodkládej vzorem.</p>
+    </div>
+    <div class="component-card component-card-full">
+      <h3 class="component-title">Soubory v této knihovně</h3>
+      <ul class="assets">
+        <li><code>logo-main.svg</code> — vektorová primární značka</li>
+        <li><code>logo-icon.svg</code> — samostatný symbol</li>
+        <li><code>apple-touch-icon.png</code> — 180×180 pro iOS</li>
+        <li><code>favicon.ico</code> — favicon pro prohlížeče</li>
+      </ul>
+      <p class="text-sm" style="margin-top:10px">Assety leží ve stejné složce jako tento soubor. Při přesunu knihy přesuň i je.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ 02 · BARVY ═══════════════════════════════ -->
+<section id="colors">
+  <span class="section-label">02 · Barvy</span>
+  <h2 class="section-title">Barevný systém</h2>
+  <p class="section-desc">Tmavý graphite základ dovoluje vyniknout jedinému teplému signálu: přechodu od broskvové k lososové. Tyrkysová zůstává výhradně datovým tokem a aktivním lokálním stavem.</p>
+
+  <!-- ⟦BASE_COLORS⟧ Základní barvy — přesné hodnoty z produkce -->
+  <div class="color-group">
+    <h3 class="color-group-title">Základní barvy</h3>
+    <p class="color-group-desc">Přesné hodnoty z produkce. Klikni na plochu pro zkopírování hexu.</p>
+    <div class="color-swatches"><div class="color-swatch"><div class="swatch-fill" style="background:#0D0E10" data-hex="#0D0E10"></div><div class="info"><span class="name">Graphite</span><span class="hex">#0D0E10</span><span class="note">výchozí pozadí</span></div></div><div class="color-swatch"><div class="swatch-fill" style="background:#F5EFE8" data-hex="#F5EFE8"></div><div class="info"><span class="name">Porcelain</span><span class="hex">#F5EFE8</span><span class="note">primární text</span></div></div><div class="color-swatch"><div class="swatch-fill" style="background:#FF9D77" data-hex="#FF9D77"></div><div class="info"><span class="name">Peach Signal</span><span class="hex">#FF9D77</span><span class="note">CTA, focus, lidský záměr</span></div></div><div class="color-swatch"><div class="swatch-fill" style="background:#F27A61" data-hex="#F27A61"></div><div class="info"><span class="name">Salmon Response</span><span class="hex">#F27A61</span><span class="note">druhý konec brand gradientu</span></div></div><div class="color-swatch"><div class="swatch-fill" style="background:#67D8D1" data-hex="#67D8D1"></div><div class="info"><span class="name">Cyan Flow</span><span class="hex">#67D8D1</span><span class="note">pouze stav a datový tok</span></div></div></div>
+  </div>
+<!-- ⟦/BASE_COLORS⟧ -->
+
+  <!-- ⟦SHADE_SCALES⟧ Odstínové škály 50–900 pro každou brand barvu -->
+  <div class="color-group">
+    <h3 class="color-group-title">Peach signal</h3>
+    <p class="color-group-desc">Jediný teplý interakční akcent. <em>Odstíny mimo základ jsou odvozené.</em></p>
+    <div class="shade-row"><div class="shade" style="background:#FFFAF8;color:#0B0E14"><span class="shade-name">50</span><span class="hex">#FFFAF8</span></div><div class="shade" style="background:#FFF2ED;color:#0B0E14"><span class="shade-name">100</span><span class="hex">#FFF2ED</span></div><div class="shade" style="background:#FFE4D9;color:#0B0E14"><span class="shade-name">200</span><span class="hex">#FFE4D9</span></div><div class="shade" style="background:#FFD3C2;color:#0B0E14"><span class="shade-name">300</span><span class="hex">#FFD3C2</span></div><div class="shade" style="background:#FFBAA0;color:#0B0E14"><span class="shade-name">400</span><span class="hex">#FFBAA0</span></div><div class="shade" style="background:#FF9D77;color:#0B0E14"><span class="shade-name">500 ←</span><span class="hex">#FF9D77</span></div><div class="shade" style="background:#D18162;color:#0B0E14"><span class="shade-name">600</span><span class="hex">#D18162</span></div><div class="shade" style="background:#A3644C;color:#FFFFFF"><span class="shade-name">700</span><span class="hex">#A3644C</span></div><div class="shade" style="background:#754837;color:#FFFFFF"><span class="shade-name">800</span><span class="hex">#754837</span></div><div class="shade" style="background:#4C2F24;color:#FFFFFF"><span class="shade-name">900</span><span class="hex">#4C2F24</span></div></div>
+  </div>
+  <div class="color-group">
+    <h3 class="color-group-title">Graphite depth</h3>
+    <p class="color-group-desc">Neutrální plochy pro dark-first rozhraní. <em>Odstíny mimo základ jsou odvozené.</em></p>
+    <div class="shade-row"><div class="shade" style="background:#F4F4F4;color:#0B0E14"><span class="shade-name">50</span><span class="hex">#F4F4F4</span></div><div class="shade" style="background:#E2E2E3;color:#0B0E14"><span class="shade-name">100</span><span class="hex">#E2E2E3</span></div><div class="shade" style="background:#C0C1C2;color:#0B0E14"><span class="shade-name">200</span><span class="hex">#C0C1C2</span></div><div class="shade" style="background:#999B9C;color:#0B0E14"><span class="shade-name">300</span><span class="hex">#999B9C</span></div><div class="shade" style="background:#616366;color:#FFFFFF"><span class="shade-name">400</span><span class="hex">#616366</span></div><div class="shade" style="background:#1D2024;color:#FFFFFF"><span class="shade-name">500 ←</span><span class="hex">#1D2024</span></div><div class="shade" style="background:#181A1E;color:#FFFFFF"><span class="shade-name">600</span><span class="hex">#181A1E</span></div><div class="shade" style="background:#131417;color:#FFFFFF"><span class="shade-name">700</span><span class="hex">#131417</span></div><div class="shade" style="background:#0D0F11;color:#FFFFFF"><span class="shade-name">800</span><span class="hex">#0D0F11</span></div><div class="shade" style="background:#090A0B;color:#FFFFFF"><span class="shade-name">900</span><span class="hex">#090A0B</span></div></div>
+  </div>
+<!-- ⟦/SHADE_SCALES⟧ -->
+
+  <div class="color-group">
+    <h3 class="color-group-title">Sémantické barvy</h3>
+    <p class="color-group-desc">Stavy úspěchu, varování, chyby a informace. Barva nikdy nenese význam sama — vždy s textovým labelem.</p>
+    <div class="color-swatches">
+      <div class="color-swatch"><div class="swatch-fill" style="background:#34d399" data-hex="#34D399"></div><div class="info"><span class="name">Success</span><span class="hex">#34D399</span></div></div>
+      <div class="color-swatch"><div class="swatch-fill" style="background:#fbbf24" data-hex="#FBBF24"></div><div class="info"><span class="name">Warning</span><span class="hex">#FBBF24</span></div></div>
+      <div class="color-swatch"><div class="swatch-fill" style="background:#f87171" data-hex="#F87171"></div><div class="info"><span class="name">Error</span><span class="hex">#F87171</span></div></div>
+      <div class="color-swatch"><div class="swatch-fill" style="background:#60a5fa" data-hex="#60A5FA"></div><div class="info"><span class="name">Info</span><span class="hex">#60A5FA</span></div></div>
+    </div>
+  </div>
+
+  <!-- ⟦GRADIENTS⟧ -->
+  <div class="color-group">
+    <h3 class="color-group-title">Brand gradienty</h3>
+    <div class="gradient-card"><div class="gradient-fill" style="background:linear-gradient(135deg,#FFB08B 0%,#FF9D77 50%,#F27A61 100%)"></div><div class="info"><span class="name">gradient-brand</span><span class="hex">linear-gradient(135deg,#FFB08B 0%,#FF9D77 50%,#F27A61 100%)</span></div></div><div class="gradient-card"><div class="gradient-fill" style="background:linear-gradient(145deg,#1D2024 0%,#111315 100%)"></div><div class="info"><span class="name">gradient-surface</span><span class="hex">linear-gradient(145deg,#1D2024 0%,#111315 100%)</span></div></div>
+  </div>
+<!-- ⟦/GRADIENTS⟧ -->
+
+  <div class="color-group">
+    <h3 class="color-group-title">Pravidlo 60-30-10</h3>
+    <p class="color-group-desc">60 % pozadí · 30 % povrchy a text · 10 % akcent. Akcent se nikdy nestává plochou.</p>
+    <div class="rule-bars">
+      <div style="flex:6;background:var(--bg);color:var(--text)">60 % pozadí</div>
+      <div style="flex:3;background:var(--surface-1);color:var(--text);border-left:1px solid var(--surface-border)">30 % povrch</div>
+      <div style="flex:1;background:var(--accent);color:var(--on-accent)">10 %</div>
+    </div>
+  </div>
+
+  <div class="color-group">
+    <h3 class="color-group-title">Kontrast</h3>
+    <p class="color-group-desc">Minimum WCAG AA: 4,5:1 pro běžný text, 3:1 pro velký text a UI hranice.</p>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead><tr><th>Kombinace</th><th>Poměr</th><th>Verdikt</th></tr></thead>
+        <tbody>
+          <tr><td>text na bg</td><td>—</td><td><span class="badge badge-success">AA</span></td></tr>
+          <tr><td>on-accent na accent</td><td>—</td><td><span class="badge badge-success">AA</span></td></tr>
+          <tr><td>text-muted na surface-1</td><td>—</td><td><span class="badge badge-warning">jen ≥14px</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ 03 · TYPOGRAFIE ═════════════════════════════ -->
+<section id="typography">
+  <span class="section-label">03 · Typografie</span>
+  <h2 class="section-title">Písma a texty</h2>
+  <p class="section-desc">Písma použitá v produkci. Vzorky obsahují české diakritické znaky — kontroluj, že řez má plnou podporu.</p>
+
+  <div class="components-grid">
+    <div class="component-card">
+      <h3 class="component-title">Primární písmo</h3>
+      <p style="font-family:var(--font-head);font-size:26px;font-weight:800;margin:12px 0">Inter</p>
+      <p class="type-alphabet" style="font-family:var(--font-head)">AaBbCcČčĎďÉéĚěŠšŘřŤťŮůŽž 0123456789</p>
+      <p class="text-sm">Nadpisy i běžný text. Váhy 400–800.</p>
+      <div class="type-weights">
+        <div class="type-weight"><b style="font-weight:400;font-size:22px">Aa</b><span>400</span></div>
+        <div class="type-weight"><b style="font-weight:600;font-size:22px">Aa</b><span>600</span></div>
+        <div class="type-weight"><b style="font-weight:800;font-size:22px">Aa</b><span>800</span></div>
+      </div>
+    </div>
+    <div class="component-card">
+      <h3 class="component-title">Monospace</h3>
+      <p style="font-family:var(--font-mono);font-size:26px;font-weight:500;margin:12px 0">IBM Plex Mono</p>
+      <p class="type-alphabet" style="font-family:var(--font-mono)">AaBbCcČčĎďÉéĚěŠšŘřŤťŮůŽž 0123456789</p>
+      <p class="text-sm">Kód, metadata, labely, čísla. Váhy 500–600.</p>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Typografická škála</h3>
+  <div class="type-scale-item"><span class="type-scale-label">Display · clamp(40px, 6vw, 64px) · 800</span><div class="type-scale-sample" style="font-size:clamp(40px,6vw,64px);font-weight:800;font-family:var(--font-head)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">H1 · 40px · 800</span><div class="type-scale-sample" style="font-size:40px;font-weight:800;font-family:var(--font-head)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">H2 · 32px · 700</span><div class="type-scale-sample" style="font-size:32px;font-weight:700;font-family:var(--font-head)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">H3 · 24px · 700</span><div class="type-scale-sample" style="font-size:24px;font-weight:700;font-family:var(--font-head)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">H4 · 20px · 600</span><div class="type-scale-sample" style="font-size:20px;font-weight:600;font-family:var(--font-head)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">Body L · 18px · 400</span><div class="type-scale-sample" style="font-size:18px;font-weight:400;font-family:var(--font-body)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">Body · 16px · 400</span><div class="type-scale-sample" style="font-size:16px;font-weight:400;font-family:var(--font-body)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">Small · 14px · 400</span><div class="type-scale-sample" style="font-size:14px;font-weight:400;font-family:var(--font-body)">M.I.K.E.</div></div>
+  <div class="type-scale-item"><span class="type-scale-label">Caption · 12px · 500 · mono</span><div class="type-scale-sample" style="font-size:12px;font-weight:500;font-family:var(--font-mono)">M.I.K.E.</div></div>
+</section>
+
+<!-- ═══════════════════════════ 04 · KOMPONENTY ══════════════════════════════ -->
+<section id="components">
+  <span class="section-label">04 · Komponenty</span>
+  <h2 class="section-title">UI prvky</h2>
+  <p class="section-desc">Základní stavební bloky rozhraní. Každý prvek má minimální dotykovou plochu 44 px.</p>
+  <div class="components-grid">
+
+    <div class="component-card">
+      <h3 class="component-title">Tlačítka — varianty</h3>
+      <div class="component-demo">
+        <button class="btn btn-primary">Primární akce</button>
+        <button class="btn btn-secondary">Sekundární</button>
+        <button class="btn btn-ghost">Ghost</button>
+      </div>
+      <div class="component-demo" style="margin-top:14px">
+        <button class="btn btn-danger">Smazat</button>
+        <button class="btn btn-primary" disabled>Vypnuto</button>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Tlačítka — velikosti</h3>
+      <div class="component-demo">
+        <button class="btn btn-primary btn-sm">Malé</button>
+        <button class="btn btn-primary">Střední</button>
+        <button class="btn btn-primary btn-lg">Velké</button>
+      </div>
+      <p class="text-sm" style="margin-top:14px">Na stránce je vždy jen jedno primární tlačítko.</p>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Badge</h3>
+      <div class="component-demo">
+        <span class="badge badge-brand">Nový</span>
+        <span class="badge badge-success">Aktivní</span>
+        <span class="badge badge-warning">Čeká</span>
+        <span class="badge badge-error">Chyba</span>
+        <span class="badge badge-info">Info</span>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Přepínač &amp; progress</h3>
+      <div class="component-demo">
+        <div class="toggle on"></div><span class="text-sm">Zapnuto</span>
+        <div class="toggle"></div><span class="text-sm">Vypnuto</span>
+      </div>
+      <div class="progress-track" style="margin-top:18px"><div class="progress-fill" style="width:62%"></div></div>
+      <p class="text-sm" style="margin-top:6px">62 % dokončeno</p>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Tooltip &amp; dropdown</h3>
+      <div class="component-demo" style="align-items:flex-start">
+        <span class="tooltip-box">Nápověda k prvku</span>
+        <div class="dropdown-menu">
+          <div class="dropdown-item">Upravit</div>
+          <div class="dropdown-item">Duplikovat</div>
+          <div class="dropdown-item">Smazat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Alerty</h3>
+      <div class="alert alert-success"><span class="alert-icon">✓</span><span>Změny byly uloženy.</span></div>
+      <div class="alert alert-warning"><span class="alert-icon">!</span><span>Zbývá vyplnit dvě pole.</span></div>
+      <div class="alert alert-error"><span class="alert-icon">✕</span><span>Nepodařilo se připojit k serveru.</span></div>
+      <div class="alert alert-info" style="margin-bottom:0"><span class="alert-icon">i</span><span>Nová verze je k dispozici.</span></div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Karta obsahu</h3>
+      <div class="component-card" style="box-shadow:none;background:var(--surface-2)">
+        <span class="badge badge-brand">M.I.K.E.</span>
+        <h4 class="component-title" style="margin:10px 0 6px">Ukázková karta</h4>
+        <p class="text-sm">Karta používá surface-1, rámeček surface-border a radius-xl.</p>
+        <div style="margin-top:16px"><button class="btn btn-primary btn-sm">Potvrdit akci</button></div>
+      </div>
+    </div>
+
+    <div class="component-card component-card-full">
+      <h3 class="component-title">Tabulka</h3>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>Položka</th><th>Stav</th><th>Datum</th><th>Částka</th></tr></thead>
+          <tbody>
+            <tr><td>Faktura 2026-001</td><td><span class="badge badge-success">Zaplaceno</span></td><td>12. 3. 2026</td><td>24 500 Kč</td></tr>
+            <tr><td>Faktura 2026-002</td><td><span class="badge badge-warning">Čeká</span></td><td>19. 3. 2026</td><td>8 900 Kč</td></tr>
+            <tr><td>Faktura 2026-003</td><td><span class="badge badge-error">Po splatnosti</span></td><td>2. 4. 2026</td><td>41 200 Kč</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Modální okno</h3>
+      <div class="modal-demo">
+        <div class="modal-header"><span>Potvrdit smazání</span><button class="modal-close" aria-label="Zavřít">×</button></div>
+        <div class="modal-body">Akci nelze vrátit zpět. Opravdu chcete pokračovat?</div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost btn-sm">Zrušit</button>
+          <button class="btn btn-danger btn-sm">Smazat</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 05 · FORMULÁŘE ══════════════════════════════ -->
+<section id="forms">
+  <span class="section-label">05 · Formuláře</span>
+  <h2 class="section-title">Formulářové prvky</h2>
+  <p class="section-desc">Každý vstup má viditelný label, focus stav v akcentní barvě a chybový stav s textovým vysvětlením.</p>
+  <div class="components-grid">
+
+    <div class="component-card">
+      <h3 class="component-title">Textové vstupy</h3>
+      <label class="field" for="f-email">E-mail</label>
+      <input class="input" id="f-email" type="email" placeholder="jmeno@firma.cz">
+      <p class="field-help">Použijeme jen pro potvrzení objednávky.</p>
+      <label class="field" for="f-msg" style="margin-top:14px">Zpráva</label>
+      <textarea class="input" id="f-msg" rows="3" placeholder="Vaše zpráva…"></textarea>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Výběry a souhlasy</h3>
+      <label class="field" for="f-cat">Kategorie</label>
+      <select class="input" id="f-cat"><option>Vyberte možnost</option><option>Možnost A</option><option>Možnost B</option></select>
+      <div style="margin-top:14px">
+        <div class="checkbox-row"><input type="checkbox" id="c1" checked><label for="c1">Souhlasím s podmínkami</label></div>
+        <div class="checkbox-row"><input type="radio" name="r" id="r1" checked><label for="r1">Varianta 1</label></div>
+        <div class="checkbox-row"><input type="radio" name="r" id="r2"><label for="r2">Varianta 2</label></div>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Stavy vstupu</h3>
+      <label class="field" for="f-err">Chybný vstup</label>
+      <input class="input is-error" id="f-err" value="jmeno@" aria-invalid="true">
+      <p class="field-error">Chybí doména. Zkuste formát jmeno@firma.cz.</p>
+      <label class="field" for="f-dis" style="margin-top:14px">Nedostupné pole</label>
+      <input class="input" id="f-dis" value="Nelze upravit" disabled>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Ukázkový formulář</h3>
+      <label class="field" for="f-name">Jméno</label>
+      <input class="input" id="f-name" placeholder="Jan Novák">
+      <label class="field" for="f-co" style="margin-top:12px">Firma</label>
+      <input class="input" id="f-co" placeholder="Firma s.r.o.">
+      <div style="margin-top:18px;display:flex;gap:10px">
+        <button class="btn btn-primary">Odeslat poptávku</button>
+        <button class="btn btn-ghost">Zrušit</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 06 · NAVIGACE ═══════════════════════════════ -->
+<section id="navigation">
+  <span class="section-label">06 · Navigace</span>
+  <h2 class="section-title">Navigační prvky</h2>
+  <p class="section-desc">Hlavní lišta, boční menu, záložky, drobečková navigace a stránkování.</p>
+
+  <div class="nav-demo">
+    <span class="logo">M.I.K.E.</span>
+    <a href="#navigation" class="active">Přehled</a>
+    <a href="#navigation">Produkty</a>
+    <a href="#navigation">Ceník</a>
+    <a href="#navigation">Kontakt</a>
+    <span style="margin-left:auto"><button class="btn btn-primary btn-sm">Přihlásit</button></span>
+  </div>
+
+  <div class="grid-2" style="margin-top:22px;align-items:start">
+    <div>
+      <h3 class="component-title">Boční menu</h3>
+      <div class="sidebar-demo">
+        <div class="sidebar-item active"><span>◉</span> Dashboard</div>
+        <div class="sidebar-item"><span>◈</span> Projekty</div>
+        <div class="sidebar-item"><span>◇</span> Klienti</div>
+        <div class="sidebar-item"><span>▤</span> Analytika</div>
+        <div class="sidebar-item"><span>⚙</span> Nastavení</div>
+      </div>
+    </div>
+    <div>
+      <h3 class="component-title">Záložky, breadcrumbs, stránkování</h3>
+      <div class="tabs" style="margin-top:0">
+        <div class="tab active">Záložka 1</div><div class="tab">Záložka 2</div><div class="tab">Záložka 3</div>
+      </div>
+      <p class="breadcrumbs">Domů <span class="sep">›</span> Sekce <span class="sep">›</span> <span class="current">Aktuální stránka</span></p>
+      <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 07 · SPACING ════════════════════════════════ -->
+<section id="spacing">
+  <span class="section-label">07 · Spacing</span>
+  <h2 class="section-title">Spacing systém</h2>
+  <p class="section-desc">Základ 4 px. Všechny odstupy jsou násobky této jednotky. Komponenta nepřidává vlastní marginy mimo škálu.</p>
+  <div class="components-grid">
+
+    <div class="component-card">
+      <h3 class="component-title">Škála odstupů</h3>
+      <div class="spacing-item"><div class="spacing-box" style="width:4px"></div><span class="spacing-label">space-1</span><span class="spacing-value">4px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:8px"></div><span class="spacing-label">space-2</span><span class="spacing-value">8px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:12px"></div><span class="spacing-label">space-3</span><span class="spacing-value">12px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:16px"></div><span class="spacing-label">space-4</span><span class="spacing-value">16px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:24px"></div><span class="spacing-label">space-6</span><span class="spacing-value">24px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:32px"></div><span class="spacing-label">space-8</span><span class="spacing-value">32px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:48px"></div><span class="spacing-label">space-12</span><span class="spacing-value">48px</span></div>
+      <div class="spacing-item"><div class="spacing-box" style="width:64px"></div><span class="spacing-label">space-16</span><span class="spacing-value">64px</span></div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Border radius</h3>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-sm)"></div><span class="spacing-label">sm</span><span class="spacing-value">4px</span></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-md)"></div><span class="spacing-label">md</span><span class="spacing-value">8px</span></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-lg)"></div><span class="spacing-label">lg</span><span class="spacing-value">12px</span></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-xl)"></div><span class="spacing-label">xl</span><span class="spacing-value">16px</span></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-2xl)"></div><span class="spacing-label">2xl</span><span class="spacing-value">24px</span></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-full)"></div><span class="spacing-label">full</span><span class="spacing-value">9999px</span></div>
+    </div>
+
+    <div class="component-card component-card-full">
+      <h3 class="component-title">Stíny</h3>
+      <div class="shadow-demo">
+        <div style="box-shadow:var(--shadow-sm)">shadow-sm</div>
+        <div style="box-shadow:var(--shadow-md)">shadow-md</div>
+        <div style="box-shadow:var(--shadow-lg)">shadow-lg</div>
+        <div style="box-shadow:var(--shadow-xl)">shadow-xl</div>
+        <div style="box-shadow:var(--shadow-glow)">glow</div>
+      </div>
+    </div>
+
+    <div class="component-card component-card-full">
+      <h3 class="component-title">Rytmus stránky</h3>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>Token</th><th>Desktop</th><th>Mobil</th><th>Použití</th></tr></thead>
+          <tbody>
+            <tr><td>section-space</td><td>88 px</td><td>64 px</td><td>mezera mezi sekcemi</td></tr>
+            <tr><td>card-padding</td><td>26 px</td><td>20 px</td><td>vnitřek karet a formulářů</td></tr>
+            <tr><td>grid gap</td><td>20 px</td><td>12 px</td><td>mezera mezi kartami</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 08 · REŽIM A HLOUBKA ════════════════════════════════ -->
+<section id="mode">
+  <span class="section-label">08 · Režim</span>
+  <h2 class="section-title">Práce s dark mode</h2>
+  <p class="section-desc">M.I.K.E. je dark-first. Hloubku nesou neutrální plochy; teplý akcent je rezervován pro záměr uživatele a jasně označené akce.</p>
+  <div class="components-grid">
+
+    <div class="component-card">
+      <h3 class="component-title">Hloubka vrstev</h3>
+      <div class="depth-demo">
+        Pozadí stránky — var(--bg)
+        <div>Karta — var(--surface-1)
+          <div>Vystoupený prvek — var(--surface-2)</div>
+        </div>
+      </div>
+      <p class="text-sm" style="margin-top:10px">Hloubku nese odstín plochy, nikoli akcent.</p>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Surface barvy</h3>
+      <div class="surface-row"><div class="surface-chip" style="background:var(--bg)"></div><span class="spacing-value">--bg · pozadí</span></div>
+      <div class="surface-row"><div class="surface-chip" style="background:var(--surface-1)"></div><span class="spacing-value">--surface-1 · karta</span></div>
+      <div class="surface-row"><div class="surface-chip" style="background:var(--surface-2)"></div><span class="spacing-value">--surface-2 · vstup, vystoupení</span></div>
+      <div class="surface-row"><div class="surface-chip" style="background:var(--surface-3)"></div><span class="spacing-value">--surface-3 · akcentovaná</span></div>
+    </div>
+
+    <div class="component-card">
+      <h3 class="component-title">Glow efekt</h3>
+      <div class="component-demo" style="justify-content:center;padding:20px 0">
+        <button class="btn btn-primary" style="box-shadow:var(--shadow-glow)">CTA s glow</button>
+      </div>
+      <p class="text-sm">Glow patří pouze na hlavní CTA a aktivní stav. Nikdy na text.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 09 · GUIDELINES ═════════════════════════════ -->
+<section id="guidelines">
+  <span class="section-label">09 · Guidelines</span>
+  <h2 class="section-title">Použití značky</h2>
+  <p class="section-desc">Co dělat a čeho se vyvarovat. Každý bod je konkrétní a ověřitelný — ne obecná rada.</p>
+  <div class="dodont">
+    <div>
+      <div class="do-item">✓ Akcent používej na akce a aktivní stavy</div>
+      <div class="do-item">✓ Pozadí je vždy --bg, karty vždy --surface-1</div>
+      <div class="do-item">✓ Stav vždy doplň textovým labelem, ne jen barvou</div>
+      <div class="do-item">✓ Mono písmo jen na metadata, čísla a kód</div>
+    </div>
+    <div>
+      <div class="dont-item">✕ Nepokládej akcentní text na světlé pozadí</div>
+      <div class="dont-item">✕ Nepoužívej jinou červenou než sémantickou --error</div>
+      <div class="dont-item">✕ Nekombinuj gradient s dalším gradientem vedle sebe</div>
+      <div class="dont-item">✕ Neměň poměr symbolu a textu ve značce</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ OPTIONAL 10 · FOUNDATIONS (pravidla před stylem) ══════════ -->
+<section id="foundations">
+  <span class="section-label">10 · Foundations</span>
+  <h2 class="section-title">Pravidla před stylem</h2>
+  <p class="section-desc">Komponenta nesmí přidávat vlastní barvu, spacing ani stín. Nejdřív použij token; teprve chybějící token je důvod rozšířit systém.</p>
+  <div class="rules-grid">
+    <div class="rule-card keep">
+      <h4>Must preserve</h4>
+      <ul><li>Vrstvení ploch a klidný canvas</li><li>Akcent pro primární akci a focus</li><li>Gradient jako signál, ne výplň</li></ul>
+    </div>
+    <div class="rule-card adapt">
+      <h4>May adapt</h4>
+      <ul><li>Počet sloupců a hustota podle breakpointu</li><li>Velikost display textu</li><li>Marketingové kompozice při zachování tokenů</li></ul>
+    </div>
+    <div class="rule-card never">
+      <h4>Never</h4>
+      <ul><li>Nahodilý hex v komponentě</li><li>Gradientový body text</li><li>Interakce jen přes hover bez focusu</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ OPTIONAL 11 · IKONY ══════════════════════════ -->
+<!-- ═════════════════ OPTIONAL 12 · PRODUKTOVÉ VZORY ════════════════════════ -->
+<section id="patterns">
+  <span class="section-label">12 · Vzory</span>
+  <h2 class="section-title">Produktové vzory</h2>
+  <p class="section-desc">Složené vzory specifické pro tento produkt. Obsah a data se mohou měnit, hierarchie ne.</p>
+  <div class="components-grid">
+    <div class="component-card">
+      <div style="height:6px;background:var(--gradient-brand);margin:-26px -26px 20px;border-radius:var(--radius-xl) var(--radius-xl) 0 0"></div>
+      <span class="badge badge-brand">Kategorie</span>
+      <h3 class="component-title" style="margin:12px 0 6px">Název vzoru</h3>
+      <p class="text-sm">Popis toho, co vzor řeší a kdy se používá.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px">
+        <span class="text-sm">Metadata</span>
+        <button class="btn btn-primary btn-sm">Otevřít</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ OPTIONAL 13 · HANDOFF ════════════════════════ -->
+<section id="handoff">
+  <span class="section-label">13 · Handoff</span>
+  <h2 class="section-title">Pravidla pro produkci</h2>
+  <p class="section-desc">Statická kniha není implementace. Aplikace vlastní routing a data; systém předává pravidla pro layout, stavy a přístupnost.</p>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead><tr><th>Rozsah</th><th>Chování</th><th>Must preserve</th></tr></thead>
+      <tbody>
+        <tr><td>0–639 px</td><td>1 sloupec, kompaktní header, formuláře na plnou šířku</td><td>44 px hit area, pořadí obsahu</td></tr>
+        <tr><td>640–899 px</td><td>2 sloupce jen tam, kde nezkracují obsah</td><td>tokenová spacing škála, hierarchie CTA</td></tr>
+        <tr><td>900+ px</td><td>trvalý sidebar, až 4 karty v řadě</td><td>maximální šířka řádku, klidná hustota</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="components-grid" style="margin-top:22px">
+    <div class="component-card">
+      <h3 class="component-title">Motion</h3>
+      <p class="text-sm">Krátká zpětná vazba. <code>prefers-reduced-motion</code> vypíná animace i smooth scroll. Pohyb nikdy není jediný nositel informace.</p>
+    </div>
+    <div class="component-card">
+      <h3 class="component-title">Přístupnost</h3>
+      <p class="text-sm">Viditelný focus ring, kontrast AA, každý input má label, stav má textový popis vedle barvy.</p>
+    </div>
+    <div class="component-card">
+      <h3 class="component-title">Verze a assety</h3>
+      <p class="text-sm">v1.0 · zdrojová SVG leží vedle tohoto souboru. Změna tokenu = nová minor verze a záznam v changelogu.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// Zvýraznění aktivní položky v sidebaru
+(function(){
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.sidebar a');
+  const sync = () => {
+    let current = '';
+    sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.id; });
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  };
+  addEventListener('scroll', sync, {passive:true}); sync();
+})();
+
+// Klik na barvu zkopíruje hex
+(function(){
+  document.querySelectorAll('[data-hex], .shade').forEach(el => {
+    el.addEventListener('click', () => {
+      const hex = el.dataset.hex || el.querySelector('.hex')?.textContent;
+      if (!hex) return;
+      navigator.clipboard?.writeText(hex.trim());
+      const old = el.style.outline;
+      el.style.outline = '3px solid var(--accent)';
+      setTimeout(() => el.style.outline = old, 400);
+    });
+  });
+})();
+</script>
+</body>
+</html>
