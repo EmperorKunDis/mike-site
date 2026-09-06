@@ -1,0 +1,2 @@
+.cta h2{max-width:16ch}
+@media(max-width:800px){.cta h2{max-width:13ch}}
